@@ -21,7 +21,7 @@ jobs:
 
   integration:
     working_directory: ~/marquez-java
-    machine: true
+    docker:
       - image: circleci/openjdk:11-jdk
       - image: circleci/postgres:12.1
     steps:

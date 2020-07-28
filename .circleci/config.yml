@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/marquez-java
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11-jdk
     steps:
       - checkout
       - restore_cache:
@@ -19,7 +19,19 @@ jobs:
           paths:
             - ~/.gradle
 
+  integration:
+    working_directory: ~/marquez-java
+    machine: true
+      - image: circleci/openjdk:11-jdk
+      - image: circleci/postgres:12.1
+    steps:
+      - checkout
+      - run: ./.circleci/integration.sh
+
 workflows:
   marquez_java:
     jobs:
       - build
+      - integration:
+          requires:
+            - build

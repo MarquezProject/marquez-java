@@ -25,6 +25,7 @@ jobs:
       - image: circleci/openjdk:11-jdk
       - image: circleci/postgres:12.1
     steps:
+      - setup_remote_docker
       - checkout
       - run: ./.circleci/integration.sh
 
